@@ -1,6 +1,9 @@
-﻿namespace MemeVM.Translation.Helpers {
-    struct Offset {
-        internal Offset(int start, int val) {
+﻿namespace MemeVM.Translation.Helpers
+{
+    internal struct Offset
+    {
+        internal Offset(int start, int val)
+        {
             Starts = start;
             Value = val;
         }

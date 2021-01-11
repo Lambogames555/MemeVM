@@ -1,23 +1,29 @@
 ﻿using System;
 
-namespace MemeVM.Runtime.Engine {
-    class Stack {
-        object[] _array;
-        uint _index;
+namespace MemeVM.Runtime.Engine
+{
+    internal class Stack
+    {
+        private object[] _array;
+        private uint _index;
 
-        internal Stack() {
+        internal Stack()
+        {
             _array = new object[10];
             _index = 0;
         }
 
-        ~Stack() {
+        ~Stack()
+        {
             Array.Clear(_array, 0, _array.Length);
             _array = null;
             _index = 0;
         }
 
-        internal void Push(object val) {
-            if (_index == _array.Length) {
+        internal void Push(object val)
+        {
+            if (_index == _array.Length)
+            {
                 var arr = new object[2 * _array.Length];
                 Array.Copy(_array, 0, arr, 0, _index);
                 _array = arr;
@@ -26,7 +32,8 @@ namespace MemeVM.Runtime.Engine {
             _array[_index++] = val;
         }
 
-        internal object Pop() {
+        internal object Pop()
+        {
             if (_index == 0)
                 return new NoMoreStackItem();
 

@@ -1,8 +1,9 @@
-﻿using System;
-
-namespace MemeVM.Confuser {
-    class Program {
-        static void Main(string[] args) {
+﻿namespace MemeVM.Confuser
+{
+    internal class Program
+    {
+        private static void Main(string[] args)
+        {
             //
         }
     }

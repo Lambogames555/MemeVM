@@ -1,9 +1,12 @@
-﻿using System.IO;
-using MemeVM.Runtime.Engine;
+﻿using MemeVM.Runtime.Engine;
+using System.IO;
 
-namespace MemeVM.Runtime.Handlers {
-    class Ldloc : IHandler {
+namespace MemeVM.Runtime.Handlers
+{
+    internal class Ldloc : IHandler
+    {
         public OpCode Handles => OpCode.Ldloc;
+
         public void Handle(VM machine, Body body, Instruction instruction) =>
             machine.Stack.Push(machine.Locals.Get((short)instruction.Operand));
 

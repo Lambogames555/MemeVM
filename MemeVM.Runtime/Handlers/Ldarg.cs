@@ -1,9 +1,12 @@
-﻿using System.IO;
-using MemeVM.Runtime.Engine;
+﻿using MemeVM.Runtime.Engine;
+using System.IO;
 
-namespace MemeVM.Runtime.Handlers {
-    class Ldarg : IHandler {
+namespace MemeVM.Runtime.Handlers
+{
+    internal class Ldarg : IHandler
+    {
         public OpCode Handles => OpCode.Ldarg;
+
         public void Handle(VM machine, Body body, Instruction instruction) =>
             machine.Stack.Push(machine.Parameters[(short)instruction.Operand]);
 

@@ -1,5 +1,7 @@
-﻿namespace MemeVM.Runtime.Engine {
-    enum VMState {
+﻿namespace MemeVM.Runtime.Engine
+{
+    internal enum VMState
+    {
         Next,
         Exception,
         Rethrow,

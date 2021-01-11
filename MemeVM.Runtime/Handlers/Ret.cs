@@ -1,9 +1,12 @@
-﻿using System.IO;
-using MemeVM.Runtime.Engine;
+﻿using MemeVM.Runtime.Engine;
+using System.IO;
 
-namespace MemeVM.Runtime.Handlers {
-    class Ret : IHandler {
+namespace MemeVM.Runtime.Handlers
+{
+    internal class Ret : IHandler
+    {
         public OpCode Handles => OpCode.Ret;
+
         public void Handle(VM machine, Body body, Instruction instruction) =>
             machine.State = VMState.Return;
 

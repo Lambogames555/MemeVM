@@ -1,10 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using dnlib.DotNet;
+﻿using dnlib.DotNet;
 using MemeVM.Translation;
+using System;
+using System.Collections.Generic;
 
-namespace MemeVM {
-    static class Context {
+namespace MemeVM
+{
+    internal static class Context
+    {
         internal static IMethod Entry;
         internal static ModuleDef RuntimeModule;
         internal static readonly Random Random = new Random();

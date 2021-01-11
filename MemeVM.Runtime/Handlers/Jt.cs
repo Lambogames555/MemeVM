@@ -1,12 +1,16 @@
-﻿using System.IO;
-using MemeVM.Runtime.Engine;
+﻿using MemeVM.Runtime.Engine;
+using System.IO;
 
-namespace MemeVM.Runtime.Handlers {
-    class Jt : IHandler {
+namespace MemeVM.Runtime.Handlers
+{
+    internal class Jt : IHandler
+    {
         public OpCode Handles => OpCode.Jt;
-        public void Handle(VM machine, Body body, Instruction instruction) {
+
+        public void Handle(VM machine, Body body, Instruction instruction)
+        {
             var value = machine.Stack.Pop();
-            if (value != null && (bool) value)
+            if (value != null && (bool)value)
                 machine.Ip = (int)instruction.Operand;
         }
 

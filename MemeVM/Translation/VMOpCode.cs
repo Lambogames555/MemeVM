@@ -1,5 +1,7 @@
-﻿namespace MemeVM.Translation {
-    enum VMOpCode : byte {
+﻿namespace MemeVM.Translation
+{
+    internal enum VMOpCode : byte
+    {
         Int32,
         Int64,
         Float,

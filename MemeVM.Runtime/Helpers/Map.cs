@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace MemeVM.Runtime.Helpers {
-    static class Map {
-        static Map() {
-            foreach (var type in typeof(Map).Module.GetTypes()) {
+namespace MemeVM.Runtime.Helpers
+{
+    internal static class Map
+    {
+        static Map()
+        {
+            foreach (var type in typeof(Map).Module.GetTypes())
+            {
                 if (type.IsInterface)
                     continue;
 

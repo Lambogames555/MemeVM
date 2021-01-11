@@ -1,18 +1,24 @@
-﻿using System;
+﻿using Confuser.Core;
+using dnlib.DotNet;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using Confuser.Core;
-using dnlib.DotNet;
 
-namespace MemeVM {
-    public class InjectPhase : ProtectionPhase {
-        public InjectPhase(ConfuserComponent parent) : base(parent) { }
+namespace MemeVM
+{
+    public class InjectPhase : ProtectionPhase
+    {
+        public InjectPhase(ConfuserComponent parent) : base(parent)
+        {
+        }
+
         public override string Name => "MemeVM.Injection";
         public override ProtectionTargets Targets => ProtectionTargets.Methods;
 
-        protected override void Execute(ConfuserContext context, ProtectionParameters parameters) {
+        protected override void Execute(ConfuserContext context, ProtectionParameters parameters)
+        {
             if (!parameters.Targets.Any())
                 return;
 
@@ -28,7 +34,9 @@ namespace MemeVM {
             if (!File.Exists(cliPath))
             {
                 context.Logger.Warn("Confuser.CLI.exe could not be found. MemeVM.Runtime.dll cannot be protected.");
-            } else {
+            }
+            else
+            {
                 //the protection can break the vm
                 context.Logger.Info("Protecting VM runtime...");
                 var info = new ProcessStartInfo

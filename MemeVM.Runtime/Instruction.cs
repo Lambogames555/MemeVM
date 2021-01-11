@@ -1,6 +1,9 @@
-﻿namespace MemeVM.Runtime {
-    struct Instruction {
-        internal Instruction(OpCode code, object op = null) {
+﻿namespace MemeVM.Runtime
+{
+    internal struct Instruction
+    {
+        internal Instruction(OpCode code, object op = null)
+        {
             Code = code;
             Operand = op;
         }

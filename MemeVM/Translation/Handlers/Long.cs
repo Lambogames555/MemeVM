@@ -1,18 +1,23 @@
-﻿using System;
-using dnlib.DotNet;
+﻿using dnlib.DotNet;
 using dnlib.DotNet.Emit;
 using MemeVM.Translation.Helpers;
+using System;
 
-namespace MemeVM.Translation.Handlers {
-    class Long : IHandler {
+namespace MemeVM.Translation.Handlers
+{
+    internal class Long : IHandler
+    {
         public OpCode[] Translates => new[] { OpCodes.Ldc_I8 };
         public VMOpCode Output => VMOpCode.Int64;
-        public VMInstruction Translate(VMBody body, MethodDef method, int index, Offsets helper, out bool success) {
+
+        public VMInstruction Translate(VMBody body, MethodDef method, int index, Offsets helper, out bool success)
+        {
             success = true;
             return new VMInstruction(VMOpCode.Int32, (long)method.Body.Instructions[index].Operand);
         }
 
-        public byte[] Serialize(VMBody body, VMInstruction instruction, Offsets helper) {
+        public byte[] Serialize(VMBody body, VMInstruction instruction, Offsets helper)
+        {
             var buf = new byte[9];
             buf[0] = (byte)VMOpCode.Int64;
 

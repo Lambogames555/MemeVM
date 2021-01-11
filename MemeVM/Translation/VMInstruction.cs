@@ -1,6 +1,9 @@
-﻿namespace MemeVM.Translation {
-    struct VMInstruction {
-        internal VMInstruction(VMOpCode code, object op = null) {
+﻿namespace MemeVM.Translation
+{
+    internal struct VMInstruction
+    {
+        internal VMInstruction(VMOpCode code, object op = null)
+        {
             OpCode = code;
             Operand = op;
         }

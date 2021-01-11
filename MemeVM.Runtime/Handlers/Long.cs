@@ -1,9 +1,12 @@
-﻿using System.IO;
-using MemeVM.Runtime.Engine;
+﻿using MemeVM.Runtime.Engine;
+using System.IO;
 
-namespace MemeVM.Runtime.Handlers {
-    class Long : IHandler {
+namespace MemeVM.Runtime.Handlers
+{
+    internal class Long : IHandler
+    {
         public OpCode Handles => OpCode.Int64;
+
         public void Handle(VM machine, Body body, Instruction instruction) =>
             machine.Stack.Push(instruction.Operand);
 

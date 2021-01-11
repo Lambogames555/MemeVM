@@ -1,8 +1,10 @@
 ﻿using dnlib.DotNet;
 using dnlib.DotNet.Writer;
 
-namespace MemeVM.Translation.Helpers {
-    static class TokenGetter {
+namespace MemeVM.Translation.Helpers
+{
+    internal static class TokenGetter
+    {
         internal static ModuleWriterBase Writer;
 
         internal static int GetMdToken(IMemberDef member) =>

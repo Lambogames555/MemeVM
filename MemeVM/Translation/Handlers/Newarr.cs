@@ -1,16 +1,21 @@
-﻿using System;
-using dnlib.DotNet;
+﻿using dnlib.DotNet;
 using dnlib.DotNet.Emit;
 using MemeVM.Translation.Helpers;
+using System;
 
-namespace MemeVM.Translation.Handlers {
+namespace MemeVM.Translation.Handlers
+{
     //TODO: Generics
-    class Newarr : IHandler {
+    internal class Newarr : IHandler
+    {
         public OpCode[] Translates => new[] { OpCodes.Newarr };
         public VMOpCode Output => VMOpCode.Newarr;
-        public VMInstruction Translate(VMBody body, MethodDef method, int index, Offsets helper, out bool success) {
+
+        public VMInstruction Translate(VMBody body, MethodDef method, int index, Offsets helper, out bool success)
+        {
             var type = ((ITypeDefOrRef)method.Body.Instructions[index].Operand).ResolveTypeDef();
-            if (type == null) {
+            if (type == null)
+            {
                 success = false;
                 return new VMInstruction(VMOpCode.UNUSED);
             }
@@ -23,7 +28,8 @@ namespace MemeVM.Translation.Handlers {
             return new VMInstruction(VMOpCode.Newarr, new Tuple<short, TypeDef>((short)body.References.IndexOf(fqname), type));
         }
 
-        public byte[] Serialize(VMBody body, VMInstruction instruction, Offsets helper) {
+        public byte[] Serialize(VMBody body, VMInstruction instruction, Offsets helper)
+        {
             var buf = new byte[7];
             buf[0] = (byte)VMOpCode.Newarr;
             var (referenceid, type) = (Tuple<short, TypeDef>)instruction.Operand;

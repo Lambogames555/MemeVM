@@ -1,5 +1,7 @@
-﻿namespace MemeVM.Runtime {
-    enum OpCode : byte {
+﻿namespace MemeVM.Runtime
+{
+    internal enum OpCode : byte
+    {
         Int32,
         Int64,
         Float,

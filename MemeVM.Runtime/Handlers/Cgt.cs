@@ -1,10 +1,14 @@
-﻿using System.IO;
-using MemeVM.Runtime.Engine;
+﻿using MemeVM.Runtime.Engine;
+using System.IO;
 
-namespace MemeVM.Runtime.Handlers {
-    class Cgt : IHandler {
+namespace MemeVM.Runtime.Handlers
+{
+    internal class Cgt : IHandler
+    {
         public OpCode Handles => OpCode.Cgt;
-        public void Handle(VM machine, Body body, Instruction instruction) {
+
+        public void Handle(VM machine, Body body, Instruction instruction)
+        {
             dynamic one = machine.Stack.Pop(), two = machine.Stack.Pop();
 
             machine.Stack.Push(one > two);

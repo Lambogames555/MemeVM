@@ -1,15 +1,20 @@
-﻿using System;
-using dnlib.DotNet;
+﻿using dnlib.DotNet;
 using dnlib.DotNet.Emit;
 using MemeVM.Translation.Helpers;
+using System;
 
-namespace MemeVM.Translation.Handlers {
-    class Ldfld : IHandler {
+namespace MemeVM.Translation.Handlers
+{
+    internal class Ldfld : IHandler
+    {
         public OpCode[] Translates => new[] { OpCodes.Ldfld, OpCodes.Ldsfld };
         public VMOpCode Output => VMOpCode.Ldfld;
-        public VMInstruction Translate(VMBody body, MethodDef method, int index, Offsets helper, out bool success) {
+
+        public VMInstruction Translate(VMBody body, MethodDef method, int index, Offsets helper, out bool success)
+        {
             var op = ((IField)method.Body.Instructions[index].Operand).ResolveFieldDef();
-            if (op == null) {
+            if (op == null)
+            {
                 success = false;
                 return new VMInstruction(VMOpCode.UNUSED);
             }
@@ -22,7 +27,8 @@ namespace MemeVM.Translation.Handlers {
             return new VMInstruction(VMOpCode.Ldfld, new Tuple<short, FieldDef>((short)body.References.IndexOf(fqname), op));
         }
 
-        public byte[] Serialize(VMBody body, VMInstruction instruction, Offsets helper) {
+        public byte[] Serialize(VMBody body, VMInstruction instruction, Offsets helper)
+        {
             var buf = new byte[7];
             buf[0] = (byte)VMOpCode.Ldfld;
             var (refid, field) = (Tuple<short, FieldDef>)instruction.Operand;

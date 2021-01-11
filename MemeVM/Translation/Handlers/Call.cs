@@ -1,16 +1,21 @@
-﻿using System;
-using dnlib.DotNet;
+﻿using dnlib.DotNet;
 using dnlib.DotNet.Emit;
 using MemeVM.Translation.Helpers;
+using System;
 
-namespace MemeVM.Translation.Handlers {
+namespace MemeVM.Translation.Handlers
+{
     //TODO: Generic methods...
-    class Call : IHandler {
+    internal class Call : IHandler
+    {
         public OpCode[] Translates => new[] { OpCodes.Call, OpCodes.Callvirt, OpCodes.Newobj };
         public VMOpCode Output => VMOpCode.Call;
-        public VMInstruction Translate(VMBody body, MethodDef method, int index, Offsets helper, out bool success) {
+
+        public VMInstruction Translate(VMBody body, MethodDef method, int index, Offsets helper, out bool success)
+        {
             var operand = method.Body.Instructions[index].Operand;
-            if (operand is MethodSpec) {
+            if (operand is MethodSpec)
+            {
                 success = false;
                 return new VMInstruction(VMOpCode.UNUSED);
             }
@@ -24,12 +29,14 @@ namespace MemeVM.Translation.Handlers {
             return new VMInstruction(VMOpCode.Call, new Tuple<short, MethodDef>((short)body.References.IndexOf(fqname), target));
         }
 
-        public byte[] Serialize(VMBody body, VMInstruction instruction, Offsets helper) {
+        public byte[] Serialize(VMBody body, VMInstruction instruction, Offsets helper)
+        {
             var buf = new byte[8];
             buf[0] = (byte)VMOpCode.Call;
             var (referenceId, method) = (Tuple<short, MethodDef>)instruction.Operand;
 
-            if (!body.Translated.ContainsKey(method)) {
+            if (!body.Translated.ContainsKey(method))
+            {
                 Array.Copy(BitConverter.GetBytes(referenceId), 0, buf, 1, 2);
                 Array.Copy(BitConverter.GetBytes(TokenGetter.GetMdToken(method)), 0, buf, 3, 4);
                 buf[7] = 0;

@@ -1,17 +1,21 @@
-﻿using System;
+﻿using MemeVM.Runtime.Engine;
+using System;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using MemeVM.Runtime.Engine;
 
-namespace MemeVM.Runtime.Handlers {
+namespace MemeVM.Runtime.Handlers
+{
     //TODO: Generic methods
-    class Call : IHandler {
+    internal class Call : IHandler
+    {
         public OpCode Handles => OpCode.Call;
-        public void Handle(VM machine, Body body, Instruction instruction) {
+
+        public void Handle(VM machine, Body body, Instruction instruction)
+        {
             var op = (Tuple<short, int, bool>)instruction.Operand;
 
-            if (!op.Item3) {
+            if (!op.Item3)
+            {
                 HandleNormal(machine, body, instruction);
                 return;
             }
@@ -28,7 +32,8 @@ namespace MemeVM.Runtime.Handlers {
                 machine.Stack.Push(res);
         }
 
-        static void HandleNormal(VM machine, Body body, Instruction instruction) {
+        private static void HandleNormal(VM machine, Body body, Instruction instruction)
+        {
             var op = (Tuple<short, int, bool>)instruction.Operand;
 
             var asm = body.GetReference(op.Item1);
@@ -41,7 +46,8 @@ namespace MemeVM.Runtime.Handlers {
             for (var i = parameters.Length - 1; i >= 0; i--)
                 parameters[i] = machine.Stack.Pop();
 
-            if ((info.MemberType & MemberTypes.Constructor) == MemberTypes.Constructor) {
+            if ((info.MemberType & MemberTypes.Constructor) == MemberTypes.Constructor)
+            {
                 var ctorinfo = (ConstructorInfo)info;
                 machine.Stack.Push(ctorinfo.Invoke(parameters));
                 return;

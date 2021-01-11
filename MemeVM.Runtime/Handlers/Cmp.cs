@@ -1,10 +1,14 @@
-﻿using System.IO;
-using MemeVM.Runtime.Engine;
+﻿using MemeVM.Runtime.Engine;
+using System.IO;
 
-namespace MemeVM.Runtime.Handlers {
-    class Cmp : IHandler {
+namespace MemeVM.Runtime.Handlers
+{
+    internal class Cmp : IHandler
+    {
         public OpCode Handles => OpCode.Cmp;
-        public void Handle(VM machine, Body body, Instruction instruction) {
+
+        public void Handle(VM machine, Body body, Instruction instruction)
+        {
             dynamic one = machine.Stack.Pop(), two = machine.Stack.Pop();
 
             machine.Stack.Push(one == two);

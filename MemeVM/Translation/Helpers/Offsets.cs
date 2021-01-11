@@ -1,12 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace MemeVM.Translation.Helpers {
-    class Offsets {
+namespace MemeVM.Translation.Helpers
+{
+    internal class Offsets
+    {
         internal Offsets() =>
             _offsets = new List<Offset>();
 
-        readonly List<Offset> _offsets;
+        private readonly List<Offset> _offsets;
 
         internal void Add(int index, int offset) =>
             _offsets.Add(new Offset(index, offset));

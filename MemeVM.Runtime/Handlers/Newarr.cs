@@ -1,11 +1,15 @@
-﻿using System;
+﻿using MemeVM.Runtime.Engine;
+using System;
 using System.IO;
-using MemeVM.Runtime.Engine;
 
-namespace MemeVM.Runtime.Handlers {
-    class Newarr : IHandler {
+namespace MemeVM.Runtime.Handlers
+{
+    internal class Newarr : IHandler
+    {
         public OpCode Handles => OpCode.Newarr;
-        public void Handle(VM machine, Body body, Instruction instruction) {
+
+        public void Handle(VM machine, Body body, Instruction instruction)
+        {
             var tuple = (Tuple<short, int>)instruction.Operand;
 
             var refid = tuple.Item1;

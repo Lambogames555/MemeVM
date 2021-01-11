@@ -1,11 +1,15 @@
-﻿using System;
+﻿using MemeVM.Runtime.Engine;
+using System;
 using System.IO;
-using MemeVM.Runtime.Engine;
 
-namespace MemeVM.Runtime.Handlers {
-    class Ldfld : IHandler {
+namespace MemeVM.Runtime.Handlers
+{
+    internal class Ldfld : IHandler
+    {
         public OpCode Handles => OpCode.Ldfld;
-        public void Handle(VM machine, Body body, Instruction instruction) {
+
+        public void Handle(VM machine, Body body, Instruction instruction)
+        {
             var id = ((Tuple<short, int>)instruction.Operand).Item1;
             var token = ((Tuple<short, int>)instruction.Operand).Item2;
 

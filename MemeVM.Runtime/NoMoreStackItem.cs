@@ -1,1 +1,2 @@
-﻿namespace MemeVM.Runtime { struct NoMoreStackItem { } }
+﻿
+namespace MemeVM.Runtime { internal struct NoMoreStackItem { } }

@@ -1,9 +1,11 @@
-﻿using System;
-using MemeVM.Runtime.Helpers;
+﻿using MemeVM.Runtime.Helpers;
+using System;
 
-namespace MemeVM.Runtime.Engine {
-    class VM {
-        readonly Instruction[] _instructions;
+namespace MemeVM.Runtime.Engine
+{
+    internal class VM
+    {
+        private readonly Instruction[] _instructions;
 
         internal int Ip;
         internal VMState State;
@@ -12,7 +14,8 @@ namespace MemeVM.Runtime.Engine {
         internal readonly Body VMBody;
         internal object[] Parameters;
 
-        internal VM(Instruction[] program, Body body, object[] parameters) {
+        internal VM(Instruction[] program, Body body, object[] parameters)
+        {
             _instructions = program;
 
             Ip = 0;
@@ -23,8 +26,9 @@ namespace MemeVM.Runtime.Engine {
             Parameters = parameters;
         }
 
-        internal object Run() {
-            for (;State == VMState.Next; ++Ip)
+        internal object Run()
+        {
+            for (; State == VMState.Next; ++Ip)
                 Map.Lookup(_instructions[Ip].Code).Handle(this, VMBody, _instructions[Ip]);
 
             if (State == VMState.Return)

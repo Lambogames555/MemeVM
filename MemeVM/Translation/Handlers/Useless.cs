@@ -1,13 +1,17 @@
-﻿using System;
-using dnlib.DotNet;
+﻿using dnlib.DotNet;
 using dnlib.DotNet.Emit;
 using MemeVM.Translation.Helpers;
+using System;
 
-namespace MemeVM.Translation.Handlers {
-    class Useless : IHandler {
+namespace MemeVM.Translation.Handlers
+{
+    internal class Useless : IHandler
+    {
         public OpCode[] Translates => new[] { OpCodes.Nop, OpCodes.Break };
         public VMOpCode Output => VMOpCode.UNUSED;
-        public VMInstruction Translate(VMBody body, MethodDef method, int index, Offsets helper, out bool success) {
+
+        public VMInstruction Translate(VMBody body, MethodDef method, int index, Offsets helper, out bool success)
+        {
             helper.Add(index, -1);
             success = true;
             return new VMInstruction(VMOpCode.UNUSED);
