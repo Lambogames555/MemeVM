@@ -19,8 +19,8 @@ namespace MemeVM {
             if (!parameters.Targets.Any())
                 return;
 
-            context.CurrentModuleWriterListener.OnWriterEvent += InsertVMBodies;
-
+            context.CurrentModuleWriterOptions.WriterEvent += InsertVMBodies;
+            
             // ReSharper disable once PossibleInvalidCastExceptionInForeachLoop
             foreach (MethodDef method in parameters.Targets.WithProgress(context.Logger)) {
                 if (!method.HasBody || method.DeclaringType.IsGlobalModuleType || method.Body.HasExceptionHandlers)
@@ -70,9 +70,9 @@ namespace MemeVM {
             Context.RuntimeModule.Dispose();
         }
 
-        static void InsertVMBodies(object sender, ModuleWriterListenerEventArgs e) {
+        static void InsertVMBodies(object sender, ModuleWriterEventArgs e) {
             var writer = (ModuleWriterBase)sender;
-            if (e.WriterEvent != ModuleWriterEvent.MDMemberDefRidsAllocated)
+            if (e.Event != ModuleWriterEvent.MDMemberDefRidsAllocated)
                 return;
 
             TokenGetter.Writer = writer;
