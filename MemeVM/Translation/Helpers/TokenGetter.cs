@@ -6,6 +6,6 @@ namespace MemeVM.Translation.Helpers {
         internal static ModuleWriterBase Writer;
 
         internal static int GetMdToken(IMemberDef member) =>
-            Writer.Module == member.Module ? Writer.MetaData.GetToken(member).ToInt32() : member.MDToken.ToInt32();
+            Writer.Module == member.Module ? Writer.Metadata.GetToken(member).ToInt32() : member.MDToken.ToInt32();
     }
 }
